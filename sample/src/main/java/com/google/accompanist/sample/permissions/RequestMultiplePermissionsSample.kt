@@ -20,13 +20,17 @@ import android.Manifest
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.MultiplePermissionsState
@@ -56,20 +60,26 @@ class RequestMultiplePermissionsSample : ComponentActivity() {
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 private fun Sample(multiplePermissionsState: MultiplePermissionsState) {
-    if (multiplePermissionsState.allPermissionsGranted) {
-        // If all permissions are granted, then show screen with the feature enabled
-        Text("Camera and Read storage permissions Granted! Thank you!")
-    } else {
-        Column {
-            Text(
-                getTextToShowGivenPermissions(
-                    multiplePermissionsState.revokedPermissions,
-                    multiplePermissionsState.shouldShowRationale
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        if (multiplePermissionsState.allPermissionsGranted) {
+            // If all permissions are granted, then show screen with the feature enabled
+            Text("Camera and Audio permissions Granted! Thank you!")
+        } else {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    getTextToShowGivenPermissions(
+                        multiplePermissionsState.revokedPermissions,
+                        multiplePermissionsState.shouldShowRationale
+                    ),
+                    textAlign = TextAlign.Center
                 )
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = { multiplePermissionsState.launchMultiplePermissionRequest() }) {
-                Text("Request permissions")
+                Spacer(modifier = Modifier.height(8.dp))
+                Button(onClick = { multiplePermissionsState.launchMultiplePermissionRequest() }) {
+                    Text("Request permissions")
+                }
             }
         }
     }
@@ -88,7 +98,17 @@ private fun getTextToShowGivenPermissions(
     }
 
     for (i in permissions.indices) {
-        textToShow.append(permissions[i].permission)
+        val readableName = when (permissions[i].permission) {
+            Manifest.permission.CAMERA -> "camera"
+            Manifest.permission.RECORD_AUDIO -> "audio"
+            else -> {
+                permissions[i].permission
+                    .substringAfterLast(".")
+                    .replace("_", " ")
+                    .lowercase()
+            }
+        }
+        textToShow.append(readableName)
         when {
             revokedPermissionsSize > 1 && i == revokedPermissionsSize - 2 -> {
                 textToShow.append(", and ")
