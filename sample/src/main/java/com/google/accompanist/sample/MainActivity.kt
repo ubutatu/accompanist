@@ -66,6 +66,8 @@ class MainActivity : ComponentActivity() {
         val entries = mutableMapOf<String, Boolean>()
 
         list.forEach { info ->
+            if (info.activityInfo.packageName != packageName) return@forEach
+
             val labelSeq = info.loadLabel(packageManager)
             val label = labelSeq?.toString() ?: info.activityInfo.name
 
