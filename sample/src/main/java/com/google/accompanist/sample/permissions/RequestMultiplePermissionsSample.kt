@@ -25,7 +25,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -66,7 +70,15 @@ private fun Sample(multiplePermissionsState: MultiplePermissionsState) {
     ) {
         if (multiplePermissionsState.allPermissionsGranted) {
             // If all permissions are granted, then show screen with the feature enabled
-            Text("Camera and Audio permissions Granted! Thank you!")
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Icon(
+                    imageVector = Icons.Default.Done,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Text("Camera and Audio permissions Granted! Thank you!")
+            }
         } else {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
@@ -76,7 +88,7 @@ private fun Sample(multiplePermissionsState: MultiplePermissionsState) {
                     ),
                     textAlign = TextAlign.Center
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
                 Button(onClick = { multiplePermissionsState.launchMultiplePermissionRequest() }) {
                     Text("Request permissions")
                 }

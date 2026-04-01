@@ -24,7 +24,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -62,10 +66,18 @@ private fun Sample() {
         contentAlignment = Alignment.Center
     ) {
         if (locationPermissionsState.allPermissionsGranted) {
-            Text(
-                "Thank you! Precise location access is granted.",
-                textAlign = TextAlign.Center
-            )
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Icon(
+                    imageVector = Icons.Default.Done,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    "Thank you! Precise location access is granted.",
+                    textAlign = TextAlign.Center
+                )
+            }
         } else {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 val allPermissionsRevoked =
@@ -97,7 +109,7 @@ private fun Sample() {
                     text = textToShow,
                     textAlign = TextAlign.Center
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
                 Button(onClick = { locationPermissionsState.launchMultiplePermissionRequest() }) {
                     Text(buttonText)
                 }
