@@ -119,4 +119,4 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private const val EXTRA_PATH = "com.example.android.apis.Path"
+private const val EXTRA_PATH = "com.google.accompanist.sample.PATH"
