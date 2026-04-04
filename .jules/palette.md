@@ -1,0 +1,3 @@
+## 2024-05-23 - Enhancing Permission Feedback
+**Learning:** Permission request screens are often sterile and technical. Adding illustrative context icons and descriptive, actionable button text (e.g., "Allow camera access" instead of "Request permission") significantly improves user confidence and clarity. Pairing success text with a visual checkmark icon provides immediate, high-contrast confirmation.
+**Action:** Always use context-specific icons and user-centric labels in permission rationales and success states. Use `Row` with `spacedBy(8.dp)` and `CenterVertically` for consistent icon-text pairing.
