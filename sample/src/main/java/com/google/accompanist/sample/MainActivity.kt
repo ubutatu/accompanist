@@ -119,4 +119,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private const val EXTRA_PATH = "com.example.android.apis.Path"
+/**
+ * The intent extra key for the path to browse.
+ *
+ * Using a project-specific prefix helps avoid potential intent collisions with other apps
+ * and follows Android security best practices for intent extras.
+ */
+private const val EXTRA_PATH = "com.google.accompanist.sample.PATH"
