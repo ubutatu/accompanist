@@ -119,4 +119,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private const val EXTRA_PATH = "com.example.android.apis.Path"
+// Security: Use project-specific prefix for intent extras to avoid collisions
+// and follow security hygiene.
+private const val EXTRA_PATH = "com.google.accompanist.sample.PATH"
