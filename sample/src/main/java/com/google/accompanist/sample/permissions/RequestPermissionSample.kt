@@ -19,12 +19,18 @@ package com.google.accompanist.sample.permissions
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -54,13 +60,33 @@ class RequestPermissionSample : ComponentActivity() {
 private fun Sample() {
     val cameraPermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
         if (cameraPermissionState.status.isGranted) {
-            Text("Camera permission Granted")
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Done,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Text("Camera permission Granted")
+            }
         } else {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Face,
+                    contentDescription = null,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
                 val textToShow = if (cameraPermissionState.status.shouldShowRationale) {
                     "The camera is important for this app. Please grant the permission."
                 } else {
@@ -68,7 +94,6 @@ private fun Sample() {
                 }
 
                 Text(textToShow, textAlign = TextAlign.Center)
-                Spacer(modifier = Modifier.height(8.dp))
                 Button(onClick = { cameraPermissionState.launchPermissionRequest() }) {
                     Text("Request permission")
                 }
