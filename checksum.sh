@@ -22,7 +22,11 @@ fi
 touch $RESULT_FILE
 
 checksum_file() {
-  echo $(openssl md5 $1 | awk '{print $2}')
+  if command -v sha256sum >/dev/null 2>&1; then
+    sha256sum "$1" | awk '{print $1}'
+  else
+    openssl dgst -sha256 "$1" | awk '{print $2}'
+  fi
 }
 
 FILES=()
