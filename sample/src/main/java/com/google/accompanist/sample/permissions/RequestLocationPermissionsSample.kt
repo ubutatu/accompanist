@@ -19,12 +19,18 @@ package com.google.accompanist.sample.permissions
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -62,12 +68,31 @@ private fun Sample() {
         contentAlignment = Alignment.Center
     ) {
         if (locationPermissionsState.allPermissionsGranted) {
-            Text(
-                "Thank you! Precise location access is granted.",
-                textAlign = TextAlign.Center
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Done,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    "Thank you! Precise location access is granted.",
+                    textAlign = TextAlign.Center
+                )
+            }
         } else {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Face,
+                    contentDescription = null,
+                    modifier = Modifier.size(48.dp)
+                )
+
                 val allPermissionsRevoked =
                     locationPermissionsState.permissions.size ==
                         locationPermissionsState.revokedPermissions.size
@@ -90,14 +115,13 @@ private fun Sample() {
                 val buttonText = if (!allPermissionsRevoked) {
                     "Allow precise location"
                 } else {
-                    "Request permissions"
+                    "Allow location access"
                 }
 
                 Text(
                     text = textToShow,
                     textAlign = TextAlign.Center
                 )
-                Spacer(modifier = Modifier.height(8.dp))
                 Button(onClick = { locationPermissionsState.launchMultiplePermissionRequest() }) {
                     Text(buttonText)
                 }
