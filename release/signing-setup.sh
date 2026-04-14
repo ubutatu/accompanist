@@ -34,5 +34,4 @@ if [[ ! -z "$ENCRYPT_KEY" ]]; then
 
 else
   echo "ENCRYPT_KEY is empty"
-  exit 1
 fi
