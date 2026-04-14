@@ -7,3 +7,8 @@
 **Vulnerability:** The `checksum.sh` script used MD5 for integrity checks and lacked variable quoting, making it susceptible to collisions and word-splitting vulnerabilities.
 **Learning:** Legacy scripts often use older hashing algorithms like MD5 which are cryptographically broken. Additionally, unquoted variables in shell scripts can lead to unintended execution or script failure if paths contain special characters.
 **Prevention:** Use SHA-256 for all integrity and security-sensitive hashing. Always wrap shell variables in double quotes (e.g., `"$VAR"`) to prevent word-splitting and globbing attacks.
+
+## 2025-05-16 - [Secret Exposure in Process Listings]
+**Vulnerability:** Secrets (decryption keys) were passed as command-line arguments to shell scripts and the `openssl` command in GitHub Actions, making them visible in process listings (e.g., via `ps`).
+**Learning:** GitHub Actions masks secrets in logs, but passing them as arguments to processes is still insecure on the runner. `openssl` provides a safer `-pass env:VAR` mechanism to avoid this.
+**Prevention:** Always pass secrets to scripts and commands via environment variables. Use the `env` block in GitHub Actions and `openssl -pass env:KEY_NAME` to ensure secrets never appear in the process tree.

@@ -14,15 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ENCRYPT_KEY=$1
+set -e
+
+# If ENCRYPT_KEY is not set in environment, use the first argument for backward compatibility
+if [[ -z "$ENCRYPT_KEY" ]]; then
+  ENCRYPT_KEY=$1
+fi
 
 if [[ ! -z "$ENCRYPT_KEY" ]]; then
+  # Export ENCRYPT_KEY so openssl can access it via env:ENCRYPT_KEY
+  # This prevents the key from appearing in the process list.
+  export ENCRYPT_KEY
+
   # Decrypt GnuPG keyring
-  openssl aes-256-cbc -md sha256 -d -in release/secring.gpg.aes -out release/secring.gpg -k ${ENCRYPT_KEY}
+  openssl aes-256-cbc -md sha256 -d -in "release/secring.gpg.aes" -out "release/secring.gpg" -pass env:ENCRYPT_KEY
 
   # Decrypt Play Store key
-  openssl aes-256-cbc -md sha256 -d -in release/signing.properties.aes -out release/signing.properties -k ${ENCRYPT_KEY}
+  openssl aes-256-cbc -md sha256 -d -in "release/signing.properties.aes" -out "release/signing.properties" -pass env:ENCRYPT_KEY
 
 else
   echo "ENCRYPT_KEY is empty"
+  exit 1
 fi
