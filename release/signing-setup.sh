@@ -16,10 +16,9 @@
 
 set -e
 
-ENCRYPT_KEY="$1"
+ENCRYPT_KEY="${ENCRYPT_KEY:-$1}"
 
 if [[ -n "$ENCRYPT_KEY" ]]; then
-  export ENCRYPT_KEY
   # Decrypt GnuPG keyring
   openssl aes-256-cbc -md sha256 -d -in release/secring.gpg.aes -out release/secring.gpg -pass env:ENCRYPT_KEY
 
@@ -27,6 +26,6 @@ if [[ -n "$ENCRYPT_KEY" ]]; then
   openssl aes-256-cbc -md sha256 -d -in release/signing.properties.aes -out release/signing.properties -pass env:ENCRYPT_KEY
 
 else
-  echo "ENCRYPT_KEY is empty"
-  exit 1
+  echo "ENCRYPT_KEY is empty, skipping decryption"
+  exit 0
 fi
