@@ -34,8 +34,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.Material.NoActionBar"
-        android:usesCleartextTraffic="false">
+        android:theme="@android:style/Theme.Material.NoActionBar">
 
         <profileable android:shell="true"
             tools:targetApi="q" />
@@ -55,7 +54,7 @@
         <activity
             android:name=".permissions.RequestPermissionSample"
             android:label="@string/permissions_title_one"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.google.accompanist.sample.SAMPLE_CODE" />
@@ -65,7 +64,7 @@
         <activity
             android:name=".permissions.RequestMultiplePermissionsSample"
             android:label="@string/permissions_title_multiple"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.google.accompanist.sample.SAMPLE_CODE" />
@@ -75,7 +74,7 @@
         <activity
             android:name=".permissions.RequestLocationPermissionsSample"
             android:label="@string/permissions_title_location"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.google.accompanist.sample.SAMPLE_CODE" />
@@ -85,7 +84,7 @@
         <activity
             android:name=".adaptive.BasicTwoPaneSample"
             android:label="@string/adaptive_two_pane_basic"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.google.accompanist.sample.SAMPLE_CODE" />
@@ -95,7 +94,7 @@
         <activity
             android:name=".adaptive.HorizontalTwoPaneSample"
             android:label="@string/adaptive_two_pane_horizontal"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.google.accompanist.sample.SAMPLE_CODE" />
@@ -105,7 +104,7 @@
         <activity
             android:name=".adaptive.VerticalTwoPaneSample"
             android:label="@string/adaptive_two_pane_vertical"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.google.accompanist.sample.SAMPLE_CODE" />
@@ -115,7 +114,7 @@
         <activity
             android:name=".adaptive.NavRailFoldAwareColumnSample"
             android:label="@string/adaptive_fold_aware_column_nav_rail"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.google.accompanist.sample.SAMPLE_CODE" />
@@ -125,7 +124,7 @@
         <activity
             android:name=".adaptive.NavDrawerFoldAwareColumnSample"
             android:label="@string/adaptive_fold_aware_column_nav_drawer"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.google.accompanist.sample.SAMPLE_CODE" />
@@ -135,7 +134,7 @@
         <activity
             android:name=".adaptive.DraggableFoldAwareColumnSample"
             android:label="@string/adaptive_fold_aware_column_draggable"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.google.accompanist.sample.SAMPLE_CODE" />
